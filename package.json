@@ -3,8 +3,10 @@
   "version": "5.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "react-scripts start",
+    "dev:build": "react-scripts build",
+    "start": "node server",
+    "build": "npm install && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
