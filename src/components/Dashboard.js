@@ -160,7 +160,7 @@ const Dashboard = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
     const url =
-      API_URL + `messages?offset=${page * 10}&limit=${event.target.value}`;
+      API_URL + `messages?offset=0&limit=${event.target.value}`;
     if (searchValue !== "") {
       const url =
         API_URL +
