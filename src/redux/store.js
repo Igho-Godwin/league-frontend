@@ -1,6 +1,8 @@
 import { combineReducers, createStore } from "redux";
-import { tokenReducers } from "./reducers/tokenReducers";
 import { persistStore, persistReducer } from "redux-persist";
+
+import { tokenReducers } from "./reducers/tokenReducers";
+
 import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",

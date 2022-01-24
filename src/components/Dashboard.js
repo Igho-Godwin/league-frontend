@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import axios from "axios";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
@@ -159,8 +161,7 @@ const Dashboard = () => {
   const handleChangeRowsPerPage = async (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-    const url =
-      API_URL + `messages?offset=0&limit=${event.target.value}`;
+    const url = API_URL + `messages?offset=0&limit=${event.target.value}`;
     if (searchValue !== "") {
       const url =
         API_URL +

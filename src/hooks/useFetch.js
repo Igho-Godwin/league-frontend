@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { useSelector } from "react-redux";
 
 import axios from "axios";
@@ -10,7 +11,6 @@ const useFetch = (url) => {
   const token = useSelector((state) => state.tokenReducers.token);
 
   useEffect(() => {
-    console.log(3);
     if (!url) return;
     const fetchData = async () => {
       setStatus("loading");
