@@ -26,7 +26,6 @@ The following should be installed in your machine
 
 - Clone this [Repo]('https://github.com/Igho-Godwin/branch_frontend') and `cd` into it
 - create the .env file in your root directory and add REACT_APP_API_URL=https://branchbackend.herokuapp.com/api/
-DOCKER_PORT=TheDockerPorYouWant
 
 - Install all the dependancies by running the `npm install`
 - Start the application on development mode by running `npm run start`
