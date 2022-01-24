@@ -29,7 +29,7 @@ The following should be installed in your machine
 
 - Install all the dependancies by running the `npm install`
 - Start the application on development mode by running `npm run start`
-- your origin has to refrenced in the api server though to use app
+- your origin has to be referenced in the api server though to use app
 
 ## How To Install And Run The Application with docker
 
