@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import parse from "html-react-parser";
 
@@ -19,6 +20,8 @@ const Photo = ({ setPageTitle }) => {
   const [photos, setPhotoData] = useState([]);
   const [firstPhotos, setFirstPhotos] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [searchDesc, setSearchDesc] = useState("");
+
   let [searchParams] = useSearchParams();
 
   let url = `https://jsonplaceholder.typicode.com/albums/${searchParams.get(
@@ -83,6 +86,7 @@ const Photo = ({ setPageTitle }) => {
     });
 
     setPhotoData(filteredPhotos);
+    setSearchDesc(`Search Results For Photo title Like ${searchValue} `);
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -114,6 +118,16 @@ const Photo = ({ setPageTitle }) => {
           >
             Search
           </Button>
+        </Box>
+      </Container>
+      <Container sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ textAlign: "center", mt: 5, mb: 2 }}>
+          <Link to={"/"}>Go Back To Albums</Link>
+        </Box>
+      </Container>
+      <Container>
+        <Box sx={{ textAlign: "center", mt: 5, mb: 2 }}>
+          <Box component="h3">{searchDesc}</Box>
         </Box>
       </Container>
       <Container sx={{ display: "flex", justifyContent: "center" }}>
