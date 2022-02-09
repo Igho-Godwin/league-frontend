@@ -169,11 +169,11 @@ describe("# Photo", () => {
     });
 
     fireEvent.change(getByTestId("search-textfield"), {
-      target: { value: "quidem" },
+      target: { value: "il" },
     });
     fireEvent.click(getByTestId("search-button"));
 
-    const italics = container.querySelectorAll("i");
-    expect(italics.length).toBeGreaterThan(1);
+    const italics = container.querySelectorAll("#photo1 i");
+    expect(italics.length).toBe(2); // two italic words in a title
   });
 });

@@ -147,7 +147,7 @@ const Photo = ({ setPageTitle }) => {
                       loading="lazy"
                     />
                   </ImageListItem>
-                  <Box sx={{ mt: "20px", mb: "20px" }}>
+                  <Box id={"photo" + photo.id} sx={{ mt: "20px", mb: "20px" }}>
                     {parse(photo.title)}
                   </Box>
                 </Box>
