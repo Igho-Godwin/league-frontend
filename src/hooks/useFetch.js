@@ -12,15 +12,16 @@ const useFetch = (url) => {
     axios
       .get(url)
       .then((res) => {
+        setStatus("ready");
         if (res.data.length > 0) {
           setData(res.data);
-          setStatus("ready");
         } else if (!res.data.length) {
           setData([]);
-          setStatus("empty");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setStatus("error");
+      });
   }, [url]);
 
   return { status, data };

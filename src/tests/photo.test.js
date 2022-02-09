@@ -5,7 +5,7 @@ import axios from "axios";
 import testSpecs from "./__fixtures__/testSpecs.json";
 import photos from "./__fixtures__/photos.json";
 
-import { stripHtml } from "../globals/index";
+import { stripHtml } from "../utils/index";
 
 import { BrowserRouter } from "react-router-dom";
 

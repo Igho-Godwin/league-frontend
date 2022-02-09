@@ -11,14 +11,9 @@ import Paper from "@mui/material/Paper";
 import useFetch from "../hooks/useFetch";
 
 const Album = () => {
-  const [albums, setAlbumData] = useState([]);
   const { status, data } = useFetch(
     "https://jsonplaceholder.typicode.com/users/1/albums"
   );
-
-  useEffect(() => {
-    setAlbumData(data);
-  }, [data]);
 
   if (status === "error") {
     return <div>Error occurred</div>;
@@ -28,7 +23,7 @@ const Album = () => {
     return <div>Loading...</div>;
   }
 
-  if (status === "empty") {
+  if (data.length === 0) {
     return <div>No data</div>;
   }
 
@@ -61,8 +56,8 @@ const Album = () => {
                   overflow: "scroll",
                 }}
               >
-                {albums &&
-                  albums.map((album) => {
+                {data &&
+                  data.map((album) => {
                     return (
                       <div key={album.id}>
                         <Link to={"/photos?albumId=" + album.id}>

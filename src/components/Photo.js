@@ -14,29 +14,31 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-import { stripHtml } from "../globals/index";
+import { stripHtml } from "../utils/index";
 
 const Photo = ({ setPageTitle }) => {
-  const [photos, setPhotoData] = useState([]);
-  const [firstPhotos, setFirstPhotos] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [searchDesc, setSearchDesc] = useState("");
+  const [url, setUrl] = useState("");
 
-  let [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  let url = `https://jsonplaceholder.typicode.com/albums/${searchParams.get(
-    "albumId"
-  )}/photos`;
-
-  if (searchParams.get("albumId") === null) {
-    url = `https://jsonplaceholder.typicode.com/albums/1/photos`;
-  }
+  useEffect(() => {
+    if (searchParams.get("albumId") === null) {
+      setUrl(`https://jsonplaceholder.typicode.com/albums/1/photos`);
+    } else {
+      setUrl(
+        `https://jsonplaceholder.typicode.com/albums/${searchParams.get(
+          "albumId"
+        )}/photos`
+      );
+    }
+  }, [searchParams]);
 
   const { status, data } = useFetch(url);
 
   useEffect(() => {
-    setPhotoData(data);
-    setFirstPhotos(data);
     setPageTitle("Photos");
   }, [data]);
 
@@ -48,17 +50,16 @@ const Photo = ({ setPageTitle }) => {
     return <div>Loading...</div>;
   }
 
-  if (status === "empty") {
+  if (data.length === 0) {
     return <div>No data</div>;
   }
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    let intitalPhotos = [];
-    let filteredPhotos = [];
-    intitalPhotos = [...firstPhotos];
 
-    filteredPhotos = intitalPhotos.filter(function (photo) {
+    const intitalPhotos = [...data];
+
+    const filteredPhotos = intitalPhotos.filter(function (photo) {
       photo.title = stripHtml(photo.title);
       let initialTitle = photo.title;
 
@@ -85,7 +86,7 @@ const Photo = ({ setPageTitle }) => {
       } // return filtered photos
     });
 
-    setPhotoData(filteredPhotos);
+    setSearchResults(filteredPhotos);
     setSearchDesc(`Search Results For Photo title Like ${searchValue} `);
   };
 
@@ -136,22 +137,43 @@ const Photo = ({ setPageTitle }) => {
             <ImageListItem key="Subheader" cols={3}>
               <ListSubheader component="div">Photos</ListSubheader>
             </ImageListItem>
-            {photos &&
-              photos.map((photo) => (
-                <Box key={photo.id}>
-                  <ImageListItem>
-                    <img
-                      src={photo.thumbnailUrl}
-                      srcSet={photo.thumbnailUrl}
-                      alt={photo.title}
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                  <Box id={"photo" + photo.id} sx={{ mt: "20px", mb: "20px" }}>
-                    {parse(photo.title)}
+            {searchResults.length > 0
+              ? searchResults.map((photo) => (
+                  <Box key={photo.id}>
+                    <ImageListItem>
+                      <img
+                        src={photo.thumbnailUrl}
+                        srcSet={photo.thumbnailUrl}
+                        alt={photo.title}
+                        loading="lazy"
+                      />
+                    </ImageListItem>
+                    <Box
+                      id={"photo" + photo.id}
+                      sx={{ mt: "20px", mb: "20px" }}
+                    >
+                      {parse(photo.title)}
+                    </Box>
                   </Box>
-                </Box>
-              ))}
+                ))
+              : data.map((photo) => (
+                  <Box key={photo.id}>
+                    <ImageListItem>
+                      <img
+                        src={photo.thumbnailUrl}
+                        srcSet={photo.thumbnailUrl}
+                        alt={photo.title}
+                        loading="lazy"
+                      />
+                    </ImageListItem>
+                    <Box
+                      id={"photo" + photo.id}
+                      sx={{ mt: "20px", mb: "20px" }}
+                    >
+                      {parse(photo.title)}
+                    </Box>
+                  </Box>
+                ))}
           </ImageList>
         </Box>
       </Container>
