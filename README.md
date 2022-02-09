@@ -4,7 +4,7 @@ A React application that Displays Photos and Albums.
 
 ## Preview Link
 
-https://branch-frontend.vercel.app/
+https://league-frontend.vercel.app/
 
 
 ## Tools
