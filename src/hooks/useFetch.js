@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 
@@ -8,36 +6,21 @@ const useFetch = (url) => {
   const [status, setStatus] = useState("idle");
   const [data, setData] = useState([]);
 
-  const token = useSelector((state) => state.tokenReducers.token);
-
   useEffect(() => {
     if (!url) return;
-    const fetchData = async () => {
-      setStatus("loading");
-      try {
-        const response = await axios(url, {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: token.payload,
-          },
-        });
-
-        const data = response.data.data;
-
-        if (data.count > 0) {
-          setData(data);
+    setStatus("loading");
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.data.length > 0) {
+          setData(res.data);
           setStatus("ready");
-        } else if (!data.count) {
+        } else if (!res.data.length) {
           setData([]);
           setStatus("empty");
         }
-      } catch (err) {
-        setStatus("error");
-      }
-    };
-
-    fetchData();
+      })
+      .catch((err) => console.log(err));
   }, [url]);
 
   return { status, data };
