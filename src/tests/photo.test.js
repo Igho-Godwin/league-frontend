@@ -138,7 +138,7 @@ describe("# Photo", () => {
     expect(italics.length).toBe(0);
   });
 
-  it("the entire search search string where search values are found is in italics", async () => {
+  it(" check that the entire search string where search values are found is in italics", async () => {
     const mAxiosResponse = photos;
     jest.spyOn(axios, "get").mockResolvedValueOnce(mAxiosResponse);
     const { getByText, getByTestId, container } = renderPhotoList();
