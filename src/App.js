@@ -71,7 +71,7 @@ export default function App() {
       </AppBar>
       <Routes>
         <Route path="/">
-          <Route index element={<Album />} />
+          <Route index element={<Album setPageTitle={setPageTitle} />} />
           <Route
             path="photos"
             element={<Photo setPageTitle={setPageTitle} />}

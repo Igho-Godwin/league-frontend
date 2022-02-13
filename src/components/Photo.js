@@ -137,7 +137,7 @@ const Photo = ({ setPageTitle }) => {
             <ImageListItem key="Subheader" cols={3}>
               <ListSubheader component="div">Photos</ListSubheader>
             </ImageListItem>
-            {searchResults.length > 0
+            {searchDesc.length > 0
               ? searchResults.map((photo) => (
                   <Box key={photo.id}>
                     <ImageListItem>

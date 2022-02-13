@@ -17,7 +17,7 @@ const NO_DATA_LABEL = "No data";
 const renderAlbumList = () =>
   render(
     <BrowserRouter>
-      <Album />
+      <Album setPageTitle={jest.fn()} />
     </BrowserRouter>
   );
 

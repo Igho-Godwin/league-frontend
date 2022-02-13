@@ -10,10 +10,15 @@ import Paper from "@mui/material/Paper";
 
 import useFetch from "../hooks/useFetch";
 
-const Album = () => {
+const Album = ({ setPageTitle }) => {
+
   const { status, data } = useFetch(
     "https://jsonplaceholder.typicode.com/users/1/albums"
   );
+
+  useEffect(() => {
+    setPageTitle("Albums");
+  }, [data]);
 
   if (status === "error") {
     return <div>Error occurred</div>;
@@ -26,6 +31,8 @@ const Album = () => {
   if (data.length === 0) {
     return <div>No data</div>;
   }
+
+
 
   return (
     <Box sx={{ display: "flex" }}>
