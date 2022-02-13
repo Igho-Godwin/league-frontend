@@ -57,6 +57,10 @@ const Photo = ({ setPageTitle }) => {
   const handleSearch = async (event) => {
     event.preventDefault();
 
+    if(searchValue.trim().length === 0){
+       alert("search value empty");
+    }
+
     const intitalPhotos = [...data];
 
     const filteredPhotos = intitalPhotos.filter(function (photo) {
