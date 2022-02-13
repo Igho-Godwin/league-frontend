@@ -59,6 +59,7 @@ const Photo = ({ setPageTitle }) => {
 
     if(searchValue.trim().length === 0){
        alert("search value empty");
+       return;
     }
 
     const intitalPhotos = [...data];
